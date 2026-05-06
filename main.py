@@ -3,16 +3,17 @@ from tkinter import *
 import customtkinter
 from PIL import ImageTk, Image
 from customtkinter import CTkImage
+#
+import lang_csv_reader
 
 #====================Global Constants:
 BACKGROUND_COLOR = "#B1DDC6"
 LANG_TITLE_FONT = "Ariel", 40, "italic"
 WORD_FONT = "Courier", 50, "bold"
-#
-# Buttons_FONT =
 
 #====================Globals:
 player_choice = None
+random_word = "word_null"
 
 #====================SETUP
 customtkinter.set_appearance_mode("dark")
@@ -44,26 +45,57 @@ buttons_y_displacement = 50
 
 
 #====================================================================================================Flash Cards System
-
+def pick_a_word():
+    global random_word
+    #
+    random_word = lang_csv_reader.pick_random_word()
+    #
+    main_canvas.itemconfig(random_word_text, text=f"{random_word}")
 
 
 #====================================================================================================UIs
+card_facing = "front" #only 2 states, #front/#back
+def check_state():
+    global card_facing
+    ####
+    if card_facing == "front":
+        main_canvas.configure(bg="white")
+        card_widget.configure(image=card_FRONT_img)
+    elif card_facing == "back":
+        main_canvas.configure(bg="#86C1B0")
+        card_widget.configure(image=card_BACK_img)
+#------------------------------------------
+def switch_card_front():
+    global card_facing
+    card_facing = "front"
+    #
+    check_state()
+#----
+def switch_card_back():
+    global card_facing
+    card_facing = "back"
+    #
+    check_state()
+
 #_____________________________________________________________Labels + more
 #0000-Card
 # FRONT_card_body_img = CTkImage(light_image=Image.open("images/card_front.png"), size=(800,500))
-
-#0000-Canvas
+card_FRONT_img = customtkinter.CTkImage(light_image=Image.open("images/card_front.png"),size=(700,400))
+card_BACK_img = customtkinter.CTkImage(light_image=Image.open("images/card_back.png"),size=(700,400))
 
 #_________________LABEL-IMAGE
-# 1. Load the image using PIL and wrap it in CTkImage
-# Specify the 'size' to scale the image without quality loss
-my_image = customtkinter.CTkImage(light_image=Image.open("images/card_front.png"),
-                                  size=(700,400))
+card_widget = customtkinter.CTkLabel(root, image=card_FRONT_img, text="")
+card_widget.place(x=window_width/2-360, y=window_height/4-120)
 
-# 2. Add the image to a label
-image_label = customtkinter.CTkLabel(root, image=my_image, text="TEST", text_color="black", font=LANG_TITLE_FONT) # text="" removes default text
-image_label.place(x=window_width/2-380, y=window_height/4-120)
-
+#_________________Canvas
+# highlightthickness=0 keeps it looking modern without a clunky border
+main_canvas = Canvas(root, width=700, height=400, highlightthickness=0, bg="white")
+main_canvas.place(x=window_width/2-260, y=window_height/4-90)
+####
+#Canva-Text:
+# random_word = "word_null" (a global variable)
+lang_title_text = main_canvas.create_text(700/2,100, text="Fwench :3", font=LANG_TITLE_FONT)
+random_word_text = main_canvas.create_text(700/2,280, text=f"{random_word}", font=WORD_FONT)
 
 
 
