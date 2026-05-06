@@ -33,9 +33,13 @@ widgets_y_displacement = 20
 #_____________________________________________________________
 #0000-CHECK-MARK Button
 ####-------------------------BUTTON-ART / IMAGES
-correct_b__normal_state_image = ImageTk.PhotoImage(Image.open("images/right_norm.png").resize((100,100)))
-correct_b__hover_in_image = ImageTk.PhotoImage(Image.open("images/right_hover.png").resize((100,100)))
-correct_b__clicked_image =ImageTk.PhotoImage(Image.open("images/right_clicked.png").resize((100,100)))
+correct_b__normal_state_image = customtkinter.CTkImage(light_image=Image.open("images/right_norm.png"),size=(100, 100))
+correct_b__normal_state_image = customtkinter.CTkImage(light_image=Image.open("images/right_norm.png"),size=(100, 100))
+correct_b__normal_state_image = customtkinter.CTkImage(light_image=Image.open("images/right_norm.png"),size=(100, 100))
+#
+# correct_b__normal_state_image = ImageTk.PhotoImage(Image.open("images/right_norm.png").resize((100,100)))
+# correct_b__hover_in_image = ImageTk.PhotoImage(Image.open("images/right_hover.png").resize((100,100)))
+# correct_b__clicked_image =ImageTk.PhotoImage(Image.open("images/right_clicked.png").resize((100,100)))
 
 
 ####-------------------------BUTTON-MAIN-FUNCTIONS
