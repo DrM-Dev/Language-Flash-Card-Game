@@ -12,6 +12,7 @@ LANG_TITLE_FONT = "Ariel", 40, "italic"
 WORD_FONT = "Courier", 50, "bold"
 
 #====================Globals:
+lang_title = "French"
 player_choice = None
 random_word = "word_null"
 
@@ -57,25 +58,53 @@ def pick_a_word():
 card_facing = "front" #only 2 states, #front/#back
 def check_state():
     global card_facing
+    global lang_title
     ####
     if card_facing == "front":
         main_canvas.configure(bg="white")
+        main_canvas.itemconfig(lang_title_text, text=f"{lang_title}")
+        #
         card_widget.configure(image=card_FRONT_img)
+        #==========================================
     elif card_facing == "back":
         main_canvas.configure(bg="#86C1B0")
+        main_canvas.itemconfig(lang_title_text, text="Meaning:")
+        #
         card_widget.configure(image=card_BACK_img)
 #------------------------------------------
 def switch_card_front():
     global card_facing
     card_facing = "front"
+    print("debug: switch front")
     #
     check_state()
 #----
 def switch_card_back():
     global card_facing
     card_facing = "back"
+    print("debug: switch back")
     #
     check_state()
+
+
+
+#_________________TESTING BUTTONS:
+# #flip sides
+flip_front_button = customtkinter.CTkButton(root, text="FLIP FRONT", height=50, width=50,command=switch_card_front, bg_color="white", text_color="white")
+flip_front_button.place(x=300,y=500)
+# #
+flip_back_button = customtkinter.CTkButton(root, text="FLIP BACK", height=50, width=50,command=switch_card_back, bg_color="white", text_color="white")
+flip_back_button.place(x=400,y=500)
+#####
+# #pick a word
+
+
+
+
+
+
+
+
 
 #_____________________________________________________________Labels + more
 #0000-Card
@@ -94,7 +123,7 @@ main_canvas.place(x=window_width/2-260, y=window_height/4-90)
 ####
 #Canva-Text:
 # random_word = "word_null" (a global variable)
-lang_title_text = main_canvas.create_text(700/2,100, text="Fwench :3", font=LANG_TITLE_FONT)
+lang_title_text = main_canvas.create_text(700/2,100, text=f"{lang_title}", font=LANG_TITLE_FONT)
 random_word_text = main_canvas.create_text(700/2,280, text=f"{random_word}", font=WORD_FONT)
 
 
