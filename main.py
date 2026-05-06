@@ -31,11 +31,11 @@ widgets_y_displacement = 20
 
 
 #_____________________________________________________________
-#0000-Button Test
+#0000-CHECK-MARK Button
 ####-------------------------BUTTON-ART / IMAGES
-b1_normal_state_image = ImageTk.PhotoImage(Image.open("images/unclicked.png").resize((50,50)))
-b1_hover_in_image = ImageTk.PhotoImage(Image.open("images/hovered.png").resize((50,50)))
-b1_clicked_image =ImageTk.PhotoImage(Image.open("images/clicked.png").resize((50,50)))
+correct_b__normal_state_image = ImageTk.PhotoImage(Image.open("images/right_norm.png").resize((100,100)))
+correct_b__hover_in_image = ImageTk.PhotoImage(Image.open("images/right_hover.png").resize((100,100)))
+correct_b__clicked_image =ImageTk.PhotoImage(Image.open("images/right_clicked.png").resize((100,100)))
 
 
 ####-------------------------BUTTON-MAIN-FUNCTIONS
@@ -44,28 +44,28 @@ def button_event():
 
 
 ####-------------------------BUTTON-CONSTRUCTION Widget
-button_1 = customtkinter.CTkButton(root, image=b1_normal_state_image , text="", height=50, width=50,command=button_event, fg_color="transparent",border_width=0, hover=False)
-button_1.pack(padx=20,pady=20)
+check_mark_button = customtkinter.CTkButton(root, image=correct_b__normal_state_image , text="", height=50, width=50,command=button_event, fg_color="transparent",border_width=0, hover=False)
+check_mark_button.pack(padx=20,pady=20)
 
 
 ####-------------------------BUTTON-Aesthetic-functions
 #----HOVER
-def bt1_hover_in(event):
-    button_1.configure(image=b1_hover_in_image)
-def bt1_hover_out(event):
-    button_1.configure(image=b1_normal_state_image)
+def check_b_hover_in(event):
+    check_mark_button.configure(image=correct_b__hover_in_image)
+def check_b_hover_out(event):
+    check_mark_button.configure(image=correct_b__normal_state_image)
 #bind events:
-button_1.bind("<Enter>", bt1_hover_in)
-button_1.bind("<Leave>", bt1_hover_out)
+check_mark_button.bind("<Enter>", check_b_hover_in)
+check_mark_button.bind("<Leave>", check_b_hover_out)
 
 #----CLICK-STATE
-def bt1_clicked(event):
-    button_1.configure(image=b1_clicked_image)
-def bt1_unclicked(event):
-    button_1.configure(image=b1_normal_state_image)
+def check_b_clicked(event):
+    check_mark_button.configure(image=correct_b__clicked_image)
+def check_b_unclicked(event):
+    check_mark_button.configure(image=correct_b__normal_state_image)
 #bind events:
-button_1.bind("<ButtonPress-1>", bt1_clicked)
-button_1.bind("<ButtonRelease-1>", bt1_unclicked)
+check_mark_button.bind("<ButtonPress-1>", check_b_clicked)
+check_mark_button.bind("<ButtonRelease-1>", check_b_unclicked)
 
 
 #_____________________________________________________________
