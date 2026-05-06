@@ -2,6 +2,7 @@
 from tkinter import *
 import customtkinter
 from PIL import ImageTk, Image
+from customtkinter import CTkImage
 
 #====================Global Constants:
 BACKGROUND_COLOR = "#B1DDC6"
@@ -18,8 +19,12 @@ customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("dark-blue")
 #-------------
 root = customtkinter.CTk()
-root.minsize(900,600)
-root.maxsize(900,600)
+#
+window_width = 900
+window_height = 600
+#
+root.minsize(window_width,window_height)
+root.maxsize(window_width,window_height)
 root.config(padx=20,pady=20)
 #-------------
 root.title("Testing ground")
@@ -29,11 +34,42 @@ root.title("Testing ground")
 widgets_x_place = 20
 widgets_y_place = 20
 #|
-widgets_x_displacement = 20
-widgets_y_displacement = 20
+buttons_x_displacement = 20
+buttons_y_displacement = 50
 
 
-#_____________________________________________________________
+
+
+
+
+
+#====================================================================================================Flash Cards System
+
+
+
+#====================================================================================================UIs
+#_____________________________________________________________Labels + more
+#0000-Card
+# FRONT_card_body_img = CTkImage(light_image=Image.open("images/card_front.png"), size=(800,500))
+
+#0000-Canvas
+
+#_________________LABEL-IMAGE
+# 1. Load the image using PIL and wrap it in CTkImage
+# Specify the 'size' to scale the image without quality loss
+my_image = customtkinter.CTkImage(light_image=Image.open("images/card_front.png"),
+                                  size=(700,400))
+
+# 2. Add the image to a label
+image_label = customtkinter.CTkLabel(root, image=my_image, text="TEST", text_color="black", font=LANG_TITLE_FONT) # text="" removes default text
+image_label.place(x=window_width/2-380, y=window_height/4-120)
+
+
+
+
+
+
+#_____________________________________________________________BUTTONS
 #0000-CHECK-MARK Button
 ####-------------------------BUTTON-ART / IMAGES
 correct_b__normal_state_image = customtkinter.CTkImage(light_image=Image.open("images/right_norm.png"),size=(100, 100))
@@ -47,9 +83,10 @@ def check_button_event():
     #debug
     print("CORRECT pressed")
 
+
 ####-------------------------BUTTON-CONSTRUCTION Widget
 check_mark_button = customtkinter.CTkButton(root, image=correct_b__normal_state_image , text="", height=50, width=50,command=check_button_event, fg_color="transparent",border_width=0, hover=False)
-check_mark_button.place(x=150,y=400)
+check_mark_button.place(x=150,y=400+buttons_y_displacement)
 
 ####-------------------------BUTTON-Aesthetic-functions
 #----HOVER
@@ -70,7 +107,6 @@ def check_b_unclicked(event):
 check_mark_button.bind("<ButtonPress-1>", check_b_clicked)
 check_mark_button.bind("<ButtonRelease-1>", check_b_unclicked)
 
-
 #_____________________________________________________________
 #0000-WRONG-CLICK Button
 ####-------------------------BUTTON-ART / IMAGES
@@ -87,7 +123,7 @@ def wrong_button_event():
 
 ####-------------------------BUTTON-CONSTRUCTION Widget
 wrong_button = customtkinter.CTkButton(root, image=wrong_b__normal_state_image , text="", height=50, width=50,command=wrong_button_event, fg_color="transparent",border_width=0, hover=False)
-wrong_button.place(x=600,y=400)
+wrong_button.place(x=600,y=400+buttons_y_displacement)
 
 ####-------------------------BUTTON-Aesthetic-functions
 #----HOVER
