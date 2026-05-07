@@ -1,7 +1,7 @@
 #Language Flashcards Game - ver       by      Dr.M-Dev
 import random
 
-ver = 0.1
+ver = "0.1.1"
 #====================IMPORTS:
 from tkinter import *
 import customtkinter
@@ -34,6 +34,7 @@ customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("dark-blue")
 #-------------
 root = customtkinter.CTk()
+root.configure(fg_color=BACKGROUND_COLOR)
 #
 window_width = 900
 window_height = 600
@@ -42,8 +43,9 @@ root.minsize(window_width,window_height)
 root.maxsize(window_width,window_height)
 root.config(padx=20,pady=20)
 #-------------
-root.title("Testing ground")
-# window.iconbitmap()
+root.title(f"Language Flashcards Game {ver}")
+#----
+root.iconbitmap("images/LangaugeFlashGame_bitmap.ico")
 #--------------------------
 #-------------Widgets displacement
 widgets_x_place = 20
