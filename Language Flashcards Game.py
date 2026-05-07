@@ -1,3 +1,5 @@
+#Language Flashcards Game - ver       by      Dr.M-Dev
+ver = 0.1
 #====================IMPORTS:
 from tkinter import *
 import customtkinter
