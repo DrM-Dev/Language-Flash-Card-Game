@@ -167,6 +167,7 @@ def picking_word():
 #GET A CARD BUTTON - Terminal / Primordial-Button xD
 # flip_front_button = customtkinter.CTkButton(root, text="GET A NEW CARD", height=50, width=50,command=picking_word, bg_color="white", text_color="White", font=("Courier", 15, "bold"))
 # flip_front_button.place(x=300,y=500)
+# [edit: I decided to make it into a new feature "a fully functional button with CTk]
 
 
 
@@ -239,6 +240,45 @@ random_word_text = main_canvas.create_text(700/2,280, text=f"{the_word}", font=W
 
 
 #_____________________________________________________________BUTTONS
+#_____________________________________________________________
+#0000-PICK A NEW CARD Button
+####-------------------------BUTTON-ART / IMAGES
+new_card_b__normal_state_image = customtkinter.CTkImage(light_image=Image.open("images/cards_norm.png"),size=(150, 100))
+new_card_b__hover_in_image = customtkinter.CTkImage(light_image=Image.open("images/cards_hover.png"),size=(150, 100))
+new_card_b__clicked_image = customtkinter.CTkImage(light_image=Image.open("images/cards_clicked.png"),size=(150, 100))
+
+####-------------------------BUTTON-MAIN-FUNCTIONS
+# def new_card_button_event():
+#----------------------------->THE MAIN FUNCTION OF THIS BUTTON ISS GETTING A NEW CARD ->  picking_word()
+
+####-------------------------BUTTON-CONSTRUCTION Widget
+new_card_mark_button = customtkinter.CTkButton(root, image=new_card_b__normal_state_image , text="", height=50, width=150,command=picking_word, fg_color="transparent",border_width=0, hover=False)
+new_card_mark_button.place(x=150+210,y=400+buttons_y_displacement)
+
+####-------------------------BUTTON-Aesthetic-functions
+#----HOVER
+def new_card_b_hover_in(event):
+    new_card_mark_button.configure(image=new_card_b__hover_in_image)
+def new_card_b_hover_out(event):
+    new_card_mark_button.configure(image=new_card_b__normal_state_image)
+#bind events:
+new_card_mark_button.bind("<Enter>", new_card_b_hover_in)
+new_card_mark_button.bind("<Leave>", new_card_b_hover_out)
+
+#----CLICK-STATE
+def new_card_b_clicked(event):
+    new_card_mark_button.configure(image=new_card_b__clicked_image)
+def new_card_b_unclicked(event):
+    new_card_mark_button.configure(image=new_card_b__normal_state_image)
+#bind events:
+new_card_mark_button.bind("<ButtonPress-1>", new_card_b_clicked)
+new_card_mark_button.bind("<ButtonRelease-1>", new_card_b_unclicked)
+
+
+
+
+
+#_____________________________________________________________
 #0000-CHECK-MARK Button
 ####-------------------------BUTTON-ART / IMAGES
 correct_b__normal_state_image = customtkinter.CTkImage(light_image=Image.open("images/right_norm.png"),size=(100, 100))
@@ -280,6 +320,10 @@ def check_b_unclicked(event):
 #bind events:
 check_mark_button.bind("<ButtonPress-1>", check_b_clicked)
 check_mark_button.bind("<ButtonRelease-1>", check_b_unclicked)
+
+
+
+
 
 #_____________________________________________________________
 #0000-WRONG-CLICK Button
