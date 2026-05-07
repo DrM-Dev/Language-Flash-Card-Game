@@ -164,13 +164,9 @@ def picking_word():
     # print(f"THE WORD{the_word}\nANDDDD IT'S MEANING IS {the_meaning}")
 
 #--------------
-#GET A CARD BUTTON
-flip_front_button = customtkinter.CTkButton(root, text="GET A NEW CARD", height=50, width=50,command=picking_word, bg_color="white", text_color="White", font=("Courier", 15, "bold"))
-flip_front_button.place(x=300,y=500)
-
-
-
-
+#GET A CARD BUTTON - Terminal / Primordial-Button xD
+# flip_front_button = customtkinter.CTkButton(root, text="GET A NEW CARD", height=50, width=50,command=picking_word, bg_color="white", text_color="White", font=("Courier", 15, "bold"))
+# flip_front_button.place(x=300,y=500)
 
 
 
