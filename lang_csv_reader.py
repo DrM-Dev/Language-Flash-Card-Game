@@ -21,18 +21,29 @@ lang_keys_list = [ keys[0] for keys in lang_series.items() ]
 
 #===================================================================================== PICKING A RANDOM KEY [Word & it's meaning]
 ##############################
-def pick_random_word():
+def pick_random_word(exception_list):
     global chosen_lang_DIC
     global lang_keys_list
     #======
+    resalt_tuple = ""
     random_key = random.choice(lang_keys_list)
-    #
-    picked_word = random_key
-    picked_meaning = chosen_lang_DIC[picked_word]
-    #
-    print(f"this is the word= {picked_word}\nthis is the meaning= {picked_meaning}")
-    # return something
-    ############
-    resalt_tuple = (picked_word,picked_meaning)
-    ############
-    return resalt_tuple
+    #######
+    if random_key not in exception_list:
+        #
+        picked_word = random_key
+        picked_meaning = chosen_lang_DIC[picked_word]
+        #
+        print(f"this is the word= {picked_word}\nthis is the meaning= {picked_meaning}")
+        # return something
+        ############
+        resalt_tuple = (picked_word,picked_meaning)
+        ############
+    else:
+        pick_random_word(exception_list)
+
+    #___________________________________
+    #=====EMPTY TUPLE BUG FIX:
+    if resalt_tuple != "" or resalt_tuple != None:
+        return resalt_tuple
+    else:
+        pick_random_word(exception_list)
