@@ -13,7 +13,6 @@ chosen_lang_DF = pandas.read_csv(r"data/french_words.csv")
 chosen_lang_DIC = { row_info.French:row_info.English for (index,row_info) in chosen_lang_DF.iterrows()}
 
 #====================================================================================DIC to DS (Data Series) "to pick keys ONLY"
-# test:
 # TARGETED DIC => chosen_lang_DIC
 lang_series = pandas.Series(chosen_lang_DIC)
 lang_keys_list = [ keys[0] for keys in lang_series.items() ]
@@ -31,7 +30,7 @@ def pick_random_word():
     picked_word = random_key
     picked_meaning = chosen_lang_DIC[picked_word]
     #
-    print(f"this is the word= {picked_word}\nthis is the meaning={picked_meaning}")
+    print(f"this is the word= {picked_word}\nthis is the meaning= {picked_meaning}")
     # return something
     ############
     resalt_tuple = (picked_word,picked_meaning)

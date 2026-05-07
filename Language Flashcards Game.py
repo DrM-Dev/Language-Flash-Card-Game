@@ -17,6 +17,12 @@ WORD_FONT = "Courier", 50, "bold"
 lang_title = "French"
 player_choice = None
 random_word = "word_null"
+#
+the_word = ""
+the_meaning = ""
+#
+lang_keys_list = []
+guessed_keys_list = []
 
 #====================SETUP
 customtkinter.set_appearance_mode("dark")
@@ -48,15 +54,52 @@ buttons_y_displacement = 50
 
 
 #====================================================================================================Flash Cards System
-def pick_a_word():
-    global random_word
+#################################################################CHECKING PLAYER GUESS / WORD-CARD SWITCH MECHANIC
+
+#_________________________________________________________PICKING RANDOM WORD:
+list_obtained = False
+def match_lang_keys_lists():
+    global lang_keys_list
+    #global guessed_keys_list
+    #=================
+    #=================
+    lang_keys_list = lang_csv_reader.lang_keys_list
+    # DEBUG:
+    print(f"list fetched ->{lang_keys_list}")
+    print(f"{guessed_keys_list}")
+
+#++++++++++++++++++++++++++++++
+def picking_word():
+    global the_word
+    global the_meaning
+
+    if not list_obtained:
+        match_lang_keys_lists()
+    #=================
+    #=================
+    random_word_tuple = lang_csv_reader.pick_random_word()
     #
-    random_word = lang_csv_reader.pick_random_word()
+    the_word = random_word_tuple[0]
+    the_meaning = random_word_tuple[1]
     #
-    main_canvas.itemconfig(random_word_text, text=f"{random_word}")
+    # DEBUG:
+    # print(f"THE WORD{the_word}\nANDDDD IT'S MEANING IS {the_meaning}")
+
+#--------------
+#TESTING BUTTON
+flip_front_button = customtkinter.CTkButton(root, text="PICK A WORD", height=50, width=50,command=picking_word, bg_color="white", text_color="white")
+flip_front_button.place(x=300,y=500)
 
 
-#====================================================================================================UIs
+
+
+
+
+
+
+
+
+#====================================================================================================UIs + More
 card_facing = "front" #only 2 states, #front/#back
 def check_state():
     global card_facing
@@ -87,26 +130,6 @@ def switch_card_back():
     print("debug: switch back")
     #
     check_state()
-
-
-
-#_________________TESTING BUTTONS:
-def picking_word():
-    random_word_tuple = lang_csv_reader.pick_random_word()
-    #
-    the_word = random_word_tuple[0]
-    the_meaning = random_word_tuple[1]
-    #
-    print(f"THE WORD{the_word}\nANDDDD IT'S MEANING IS {the_meaning}")
-#
-flip_front_button = customtkinter.CTkButton(root, text="PICK A WORD", height=50, width=50,command=picking_word, bg_color="white", text_color="white")
-flip_front_button.place(x=300,y=500)
-
-
-
-
-
-
 
 
 
@@ -144,6 +167,8 @@ correct_b__clicked_image = customtkinter.CTkImage(light_image=Image.open("images
 ####-------------------------BUTTON-MAIN-FUNCTIONS
 def check_button_event():
     global player_choice
+    global guessed_keys_list
+    #
     player_choice = True
     #debug
     print("CORRECT pressed")
