@@ -91,14 +91,16 @@ def switch_card_back():
 
 
 #_________________TESTING BUTTONS:
-# #flip sides
-flip_front_button = customtkinter.CTkButton(root, text="FLIP FRONT", height=50, width=50,command=switch_card_front, bg_color="white", text_color="white")
+def picking_word():
+    random_word_tuple = lang_csv_reader.pick_random_word()
+    #
+    the_word = random_word_tuple[0]
+    the_meaning = random_word_tuple[1]
+    #
+    print(f"THE WORD{the_word}\nANDDDD IT'S MEANING IS {the_meaning}")
+#
+flip_front_button = customtkinter.CTkButton(root, text="PICK A WORD", height=50, width=50,command=picking_word, bg_color="white", text_color="white")
 flip_front_button.place(x=300,y=500)
-# #
-flip_back_button = customtkinter.CTkButton(root, text="FLIP BACK", height=50, width=50,command=switch_card_back, bg_color="white", text_color="white")
-flip_back_button.place(x=400,y=500)
-#####
-# #pick a word
 
 
 

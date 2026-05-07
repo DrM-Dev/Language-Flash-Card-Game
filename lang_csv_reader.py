@@ -21,6 +21,7 @@ lang_keys_list = [ keys[0] for keys in lang_series.items() ]
 # print(lang_keys_list)
 
 #===================================================================================== PICKING A RANDOM KEY [Word & it's meaning]
+##############################
 def pick_random_word():
     global chosen_lang_DIC
     global lang_keys_list
@@ -32,5 +33,7 @@ def pick_random_word():
     #
     print(f"this is the word= {picked_word}\nthis is the meaning={picked_meaning}")
     # return something
-
-pick_random_word()
+    ############
+    resalt_tuple = (picked_word,picked_meaning)
+    ############
+    return resalt_tuple
