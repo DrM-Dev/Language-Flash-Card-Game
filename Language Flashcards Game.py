@@ -16,7 +16,6 @@ LANG_TITLE_FONT = "Ariel", 40, "italic"
 WORD_FONT = "Courier", 50, "bold"
 
 #====================Globals:
-lang_title = "French"
 player_choice = None
 player_SCORE = 0
 score_effected = False #(false -> the score is NOT YET Effected),
@@ -36,7 +35,7 @@ customtkinter.set_default_color_theme("dark-blue")
 root = customtkinter.CTk()
 root.configure(fg_color=BACKGROUND_COLOR)
 #
-window_width = 900
+window_width = 1000
 window_height = 600
 #
 root.minsize(window_width,window_height)
@@ -51,10 +50,75 @@ root.iconbitmap("images/LangaugeFlashGame_bitmap.ico")
 widgets_x_place = 20
 widgets_y_place = 20
 #|
-buttons_x_displacement = 20
+buttons_x_displacement = 50
 buttons_y_displacement = 50
 
 
+#====================#====================#====================#==================
+#====================#====================#====================#====================LANGUAGES Globals:
+#====================#====================#====================#==================
+#LANGAUGES
+FRENCH_LANG = "French"
+# FRENCH_LANG_ICON =
+#x+x+x+x+x+x+x+x+x+x+x+x
+chosen_lang = "French" #default
+#x+x+x+x+x+x+x+x+x+x+x+x
+lang_title = chosen_lang
+
+# def lang_selected():
+#     global chosen_lang
+#     global lang_title
+#     #
+
+
+#++++++++++++++++++++++++++++++++++++++++BUTTON & FUNCTIONS
+LP_Window_Is_ON = False #Disabled by default! #that way you can "HOVER and ACTIVATE IT"
+
+#__________________MAIN FUN
+def pick_language():
+    ##################STARTUP
+    global LP_Window_Is_ON
+    LP_Window_Is_ON = True #-->#IMPORTANT SWITCH (to disable click-ablity & hover images)\\
+    # {-} #
+    print("DEBUG: pick-language window activated")
+    print(f"LANG PICK WINDOW STATE->>{LP_Window_Is_ON}")
+    switchL_mark_button.configure(image=switchL_b__disabled_image)
+    switchL_mark_button.configure(state="disabled")
+
+    ##################SETUP:
+    # ================
+    # ================
+    pick_lang_window = customtkinter.CTk()
+    pick_lang_window.configure(fg_color=BACKGROUND_COLOR)
+    #
+    pick_lang_window.minsize(300, 300)
+    pick_lang_window.maxsize(300, 300)
+    pick_lang_window.config(padx=20, pady=20)
+    # -------------
+    pick_lang_window.title(f"Select A Language :)")
+    # ----
+    pick_lang_window.iconbitmap("images/LangaugeFlashGame_bitmap.ico")
+    # ================
+    # ================
+
+
+    ###################Pick Language Window Options:
+
+    ##################END:
+    def on_closing():
+        global LP_Window_Is_ON
+        LP_Window_Is_ON = False #-->#IMPORTANT SWITCH (to enable click-ablity & hover images)\\
+        # {-} #
+        print("DEBUG: pick-language window IS OFF")
+        print(f"LANG PICK WINDOW STATE->>{LP_Window_Is_ON}")
+        switchL_mark_button.configure(image=switchL_b__normal_state_image)
+        switchL_mark_button.configure(state="normal")
+        #
+        pick_lang_window.destroy()  # Explicitly close the window
+
+    pick_lang_window.protocol("WM_DELETE_WINDOW", on_closing)
+    ################END_mainloop:
+    pick_lang_window.mainloop()
 
 
 
@@ -94,6 +158,8 @@ def check_player_answer():
         #-----------
         if not score_effected:
             player_SCORE += 1
+            score_counter.configure(text=f"Score:{player_SCORE}")
+            ##
             score_effected = True
         #
         # switch_card_back() -> IF YOU KNOW THE MEANING...THEN TIME TO PULL ANOTHER CARD:
@@ -109,6 +175,8 @@ def check_player_answer():
     elif not answer_state:
         if not score_effected:
             player_SCORE -= 1
+            score_counter.configure(text=f"Score:{player_SCORE}")
+            ##
             score_effected = True
         #
         switch_card_back()
@@ -216,12 +284,15 @@ def switch_card_back():
     check_state()
 
 
-
 #_____________________________________________________________Labels + more
 #0000-Card
 # FRONT_card_body_img = CTkImage(light_image=Image.open("images/card_front.png"), size=(800,500))
 card_FRONT_img = customtkinter.CTkImage(light_image=Image.open("images/card_front.png"),size=(700,400))
 card_BACK_img = customtkinter.CTkImage(light_image=Image.open("images/card_back.png"),size=(700,400))
+
+#_________________LABEL-TEXT (for player score)
+score_counter = customtkinter.CTkLabel(root, text=f"Score:{player_SCORE}", font=("Courier", 30, "bold"), text_color="black")
+score_counter.place(x=widgets_x_place+350,y=widgets_y_place-35)
 
 #_________________LABEL-IMAGE
 card_widget = customtkinter.CTkLabel(root, image=card_FRONT_img, text="")
@@ -244,6 +315,10 @@ random_word_text = main_canvas.create_text(700/2,280, text=f"{the_word}", font=W
 #_____________________________________________________________BUTTONS
 #_____________________________________________________________
 #0000-PICK A NEW CARD Button
+####-------------------------Button Text Labels
+correct_b__label = customtkinter.CTkLabel(root, text=f"Get Another Card", font=("Courier", 14, "bold"), text_color="Black")
+correct_b__label.place(x=150+210+buttons_x_displacement,y=400+buttons_y_displacement+100)
+
 ####-------------------------BUTTON-ART / IMAGES
 new_card_b__normal_state_image = customtkinter.CTkImage(light_image=Image.open("images/cards_norm.png"),size=(150, 100))
 new_card_b__hover_in_image = customtkinter.CTkImage(light_image=Image.open("images/cards_hover.png"),size=(150, 100))
@@ -255,7 +330,7 @@ new_card_b__clicked_image = customtkinter.CTkImage(light_image=Image.open("image
 
 ####-------------------------BUTTON-CONSTRUCTION Widget
 new_card_mark_button = customtkinter.CTkButton(root, image=new_card_b__normal_state_image , text="", height=50, width=150,command=picking_word, fg_color="transparent",border_width=0, hover=False)
-new_card_mark_button.place(x=150+210,y=400+buttons_y_displacement)
+new_card_mark_button.place(x=150+210+buttons_x_displacement,y=400+buttons_y_displacement)
 
 ####-------------------------BUTTON-Aesthetic-functions
 #----HOVER
@@ -282,6 +357,10 @@ new_card_mark_button.bind("<ButtonRelease-1>", new_card_b_unclicked)
 
 #_____________________________________________________________
 #0000-CHECK-MARK Button
+####-------------------------Button Text Labels
+correct_b__label = customtkinter.CTkLabel(root, text=f"I know this word", font=("Courier", 14, "bold"), text_color="Black")
+correct_b__label.place(x=130+buttons_x_displacement,y=400+buttons_y_displacement+100)
+
 ####-------------------------BUTTON-ART / IMAGES
 correct_b__normal_state_image = customtkinter.CTkImage(light_image=Image.open("images/right_norm.png"),size=(100, 100))
 correct_b__hover_in_image = customtkinter.CTkImage(light_image=Image.open("images/right_hover.png"),size=(100, 100))
@@ -299,10 +378,9 @@ def check_button_event():
     #-------------------
     check_player_answer()
 
-
 ####-------------------------BUTTON-CONSTRUCTION Widget
 check_mark_button = customtkinter.CTkButton(root, image=correct_b__normal_state_image , text="", height=50, width=50,command=check_button_event, fg_color="transparent",border_width=0, hover=False)
-check_mark_button.place(x=150,y=400+buttons_y_displacement)
+check_mark_button.place(x=150+buttons_x_displacement,y=400+buttons_y_displacement)
 
 ####-------------------------BUTTON-Aesthetic-functions
 #----HOVER
@@ -329,6 +407,10 @@ check_mark_button.bind("<ButtonRelease-1>", check_b_unclicked)
 
 #_____________________________________________________________
 #0000-WRONG-CLICK Button
+####-------------------------Button Text Labels
+wrong_b__label = customtkinter.CTkLabel(root, text=f"I don't know this word", font=("Courier", 14, "bold"), text_color="Black")
+wrong_b__label.place(x=600-40+buttons_x_displacement,y=400+buttons_y_displacement+100)
+
 ####-------------------------BUTTON-ART / IMAGES
 wrong_b__normal_state_image = customtkinter.CTkImage(light_image=Image.open("images/wrong_norm.png"),size=(100, 100))
 wrong_b__hover_in_image = customtkinter.CTkImage(light_image=Image.open("images/wrong_hover.png"),size=(100, 100))
@@ -346,7 +428,7 @@ def wrong_button_event():
 
 ####-------------------------BUTTON-CONSTRUCTION Widget
 wrong_button = customtkinter.CTkButton(root, image=wrong_b__normal_state_image , text="", height=50, width=50,command=wrong_button_event, fg_color="transparent",border_width=0, hover=False)
-wrong_button.place(x=600,y=400+buttons_y_displacement)
+wrong_button.place(x=600+buttons_x_displacement,y=400+buttons_y_displacement)
 
 ####-------------------------BUTTON-Aesthetic-functions
 #----HOVER
@@ -368,10 +450,57 @@ wrong_button.bind("<ButtonPress-1>", wrong_b_clicked)
 wrong_button.bind("<ButtonRelease-1>", wrong_b_unclicked)
 
 
+#_____________________________________________________________
+#0000-Switch-Lang Button
+####-------------------------Button Text Labels
+switchL_b__label = customtkinter.CTkLabel(root, text=f"Change Language", font=("Courier", 12, "bold"), text_color="Black")
+switchL_b__label.place(x=150+655+buttons_x_displacement,y=200+buttons_y_displacement+25)
+
+####-------------------------BUTTON-ART / IMAGES
+switchL_b__normal_state_image = customtkinter.CTkImage(light_image=Image.open("images/lang_folder_norm.png"),size=(100, 75))
+switchL_b__hover_in_image = customtkinter.CTkImage(light_image=Image.open("images/lang_folder_hover.png"),size=(100, 75))
+switchL_b__clicked_image = customtkinter.CTkImage(light_image=Image.open("images/lang_folder_hover.png"),size=(100, 75))
+switchL_b__disabled_image = customtkinter.CTkImage(light_image=Image.open("images/lang_folder_disabled.png"),size=(100,75))
+
+####-------------------------BUTTON-MAIN-FUNCTIONS
+# def switchL_button_event():
+#----------------------------->THE MAIN FUNCTION OF THIS BUTTON ISS GETTING A NEW CARD ->  pick_language()
+
+####-------------------------BUTTON-CONSTRUCTION Widget
+switchL_mark_button = customtkinter.CTkButton(root, image=switchL_b__normal_state_image , text="", height=50, width=150,command=pick_language, fg_color="transparent",border_width=0, hover=False)
+switchL_mark_button.place(x=150+640+buttons_x_displacement,y=200+buttons_y_displacement-50)
+
+####-------------------------BUTTON-Aesthetic-functions
+#----HOVER
+def switchL_b_hover_in(event):
+    global LP_Window_Is_ON
+    if not LP_Window_Is_ON:
+        switchL_mark_button.configure(image=switchL_b__hover_in_image)
+def switchL_b_hover_out(event):
+    global LP_Window_Is_ON
+    if not LP_Window_Is_ON:
+        switchL_mark_button.configure(image=switchL_b__normal_state_image)
+#bind events: ------------------------------------------------------------>AND BOUND TO "LP_Window_State" only allowed when it's FALSE "off"
+switchL_mark_button.bind("<Enter>", switchL_b_hover_in)
+switchL_mark_button.bind("<Leave>", switchL_b_hover_out)
+
+#----CLICK-STATE
+def switchL_b_clicked(event):
+    global LP_Window_Is_ON
+    if not LP_Window_Is_ON:
+        switchL_mark_button.configure(image=switchL_b__clicked_image)
+def switchL_b_unclicked(event):
+    global LP_Window_Is_ON
+    if not LP_Window_Is_ON:
+        switchL_mark_button.configure(image=switchL_b__normal_state_image)
+#bind events: ------------------------------------------------------------>AND BOUND TO "LP_Window_State" only allowed when it's FALSE "off"
+switchL_mark_button.bind("<ButtonPress-1>", switchL_b_clicked)
+switchL_mark_button.bind("<ButtonRelease-1>", switchL_b_unclicked)
+
+
+
 #_____________________________________________________________Starting the code with:
 picking_word()
-
-
 
 
 #==============END

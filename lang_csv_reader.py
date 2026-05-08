@@ -5,7 +5,7 @@ from gevent.util import print_run_info
 import random
 
 #========================Data-Base SETUP
-chosen_lang_DF = pandas.read_csv(r"data/french_words.csv")
+chosen_lang_DF = pandas.read_csv(r"data/French/fr_500.csv")
 # print(nato_phonetics_DF)
 
 #====================================================================================DB to DIC
