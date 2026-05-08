@@ -6,7 +6,7 @@ ver = "0.1.1"
 from tkinter import *
 import customtkinter
 from PIL import ImageTk, Image
-from customtkinter import CTkImage
+from customtkinter import CTkImage, CTkLabel
 #
 import lang_csv_reader
 
@@ -88,11 +88,13 @@ def pick_language():
     ##################SETUP:
     # ================
     # ================
-    pick_lang_window = customtkinter.CTk()
+    pick_lang_window = customtkinter.CTkToplevel(root)
+    pick_lang_window.attributes("-topmost", True)
+    #
     pick_lang_window.configure(fg_color=BACKGROUND_COLOR)
     #
-    pick_lang_window.minsize(300, 300)
-    pick_lang_window.maxsize(300, 300)
+    pick_lang_window.minsize(500, 300)
+    pick_lang_window.maxsize(500, 300)
     pick_lang_window.config(padx=20, pady=20)
     # -------------
     pick_lang_window.title(f"Select A Language :)")
@@ -101,8 +103,12 @@ def pick_language():
     # ================
     # ================
 
-
     ###################Pick Language Window Options:
+    #Language Image_Labels
+    french_lang_flag_img = customtkinter.CTkImage(light_image=Image.open("data/Flags/fr_flag.png"),size=(100,50))
+    #++++#
+    french_lang_flag = customtkinter.CTkLabel(pick_lang_window,text="", image=french_lang_flag_img)
+    french_lang_flag.place(x=0,y=0)
 
     ##################END:
     def on_closing():
