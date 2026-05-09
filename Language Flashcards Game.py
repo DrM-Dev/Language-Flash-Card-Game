@@ -192,7 +192,9 @@ def check_player_answer():
         ####
     elif not answer_state:
         if not score_effected:
-            player_SCORE -= 1
+            if player_SCORE != 0:
+                player_SCORE -= 1
+            #---
             score_counter.configure(text=f"Score:{player_SCORE}")
             ##
             score_effected = True
@@ -310,7 +312,7 @@ card_BACK_img = customtkinter.CTkImage(light_image=Image.open("images/card_back.
 
 #_________________LABEL-TEXT (for player score)
 score_counter = customtkinter.CTkLabel(root, text=f"Score:{player_SCORE}", font=("Courier", 30, "bold"), text_color="black")
-score_counter.place(x=widgets_x_place+350,y=widgets_y_place-35)
+score_counter.place(x=widgets_x_place+390,y=widgets_y_place-35)
 
 #_________________LABEL-IMAGE
 card_widget = customtkinter.CTkLabel(root, image=card_FRONT_img, text="")
