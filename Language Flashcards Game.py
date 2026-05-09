@@ -93,8 +93,8 @@ def pick_language():
     #
     pick_lang_window.configure(fg_color=BACKGROUND_COLOR)
     #
-    pick_lang_window.minsize(500, 300)
-    pick_lang_window.maxsize(500, 300)
+    pick_lang_window.minsize(500, 400)
+    pick_lang_window.maxsize(500, 400)
     pick_lang_window.config(padx=20, pady=20)
     # -------------
     pick_lang_window.title(f"Select A Language :)")
@@ -105,22 +105,58 @@ def pick_language():
 
     ###################Pick Language Window Options: #French or German or Russian or Spanish or Chinese
     #Language Image files:
-    french_lang_flag_img = customtkinter.CTkImage(light_image=Image.open("images/Flags/fr_flag.png"),size=(200,200))
+    french_lang_flag_img = customtkinter.CTkImage(light_image=Image.open("images/Flags/fr_flag.png"),size=(100,50))
+    german_lang_flag_img = customtkinter.CTkImage(light_image=Image.open("images/Flags/de_flag.png"), size=(100, 50))
+    russian_lang_flag_img = customtkinter.CTkImage(light_image=Image.open("images/Flags/ru_flag.png"), size=(100, 50))
+    spanish_lang_flag_img = customtkinter.CTkImage(light_image=Image.open("images/Flags/es_sp_flag.png"), size=(100, 50))
+    chinese_lang_flag_img = customtkinter.CTkImage(light_image=Image.open("images/Flags/zh_ch_flag.png"), size=(100, 50))
 
     #+++++++++++++++++++#
-    def pick_french():
+    def pick_this_language(language):
         global chosen_lang
         global lang_title
-        #
-        chosen_lang = "French"
-        lang_title = chosen_lang
-        #
+        #----
+        if language == "French":
+            chosen_lang = "French"
+            lang_title = chosen_lang
+        #----
         lang_csv_reader.lang_switch_db(chosen_lang)
-    ####
-    french_lang_flag = customtkinter.CTkButton(pick_lang_window,text="", image=french_lang_flag_img, command=pick_french)
-    french_lang_flag.place(x=0,y=0)
+    #+++++++++++++++++++#
+    french_lang_flag_b = customtkinter.CTkButton(pick_lang_window, image=french_lang_flag_img, text="", height=50,
+                                               width=150,
+                                               command=pick_this_language("French"), fg_color="transparent",
+                                               bg_color="transparent", border_width=0, hover=False)
+# ----
+    german_lang_flag_b = customtkinter.CTkButton(pick_lang_window, image=german_lang_flag_img, text="", height=50,
+                                               width=150,
+                                               command=pick_this_language("German"), fg_color="transparent",
+                                               bg_color="transparent", border_width=0, hover=False)
+#----
+    russian_lang_flag_b = customtkinter.CTkButton(pick_lang_window, image=russian_lang_flag_img, text="", height=50,
+                                               width=150,
+                                               command=pick_this_language("Russian"), fg_color="transparent",
+                                               bg_color="transparent", border_width=0, hover=False)
+#----
+    spanish_lang_flag_b = customtkinter.CTkButton(pick_lang_window, image=spanish_lang_flag_img, text="", height=50,
+                                               width=150,
+                                               command=pick_this_language("Spanish"), fg_color="transparent",
+                                               bg_color="transparent", border_width=0, hover=False)
+#----
+    chinese_lang_flag_b = customtkinter.CTkButton(pick_lang_window, image=chinese_lang_flag_img, text="", height=50,
+                                               width=150,
+                                               command=pick_this_language("Chinese"), fg_color="transparent",
+                                               bg_color="transparent", border_width=0, hover=False)
 
-
+#------------------------------------
+    flags_x_place = 50
+    flags_y_place = -60
+    flags_displacement = 60
+    #--
+    french_lang_flag_b.place(x=flags_x_place,y=flags_y_place+flags_displacement*1)
+    german_lang_flag_b.place(x=flags_x_place,y=flags_y_place+flags_displacement*2)
+    russian_lang_flag_b.place(x=flags_x_place,y=flags_y_place+flags_displacement*3)
+    spanish_lang_flag_b.place(x=flags_x_place,y=flags_y_place+flags_displacement*4)
+    chinese_lang_flag_b.place(x=flags_x_place,y=flags_y_place+flags_displacement*5)
 
     ##################END:
     def on_closing():
@@ -258,8 +294,6 @@ def picking_word():
 # flip_front_button = customtkinter.CTkButton(root, text="GET A NEW CARD", height=50, width=50,command=picking_word, bg_color="white", text_color="White", font=("Courier", 15, "bold"))
 # flip_front_button.place(x=300,y=500)
 # [edit: I decided to make it into a new feature "a fully functional button with CTk]
-
-
 
 
 
