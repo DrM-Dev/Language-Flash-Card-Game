@@ -103,12 +103,24 @@ def pick_language():
     # ================
     # ================
 
-    ###################Pick Language Window Options:
-    #Language Image_Labels
-    french_lang_flag_img = customtkinter.CTkImage(light_image=Image.open("data/Flags/fr_flag.png"),size=(100,50))
-    #++++#
-    french_lang_flag = customtkinter.CTkLabel(pick_lang_window,text="", image=french_lang_flag_img)
+    ###################Pick Language Window Options: #French or German or Russian or Spanish or Chinese
+    #Language Image files:
+    french_lang_flag_img = customtkinter.CTkImage(light_image=Image.open("images/Flags/fr_flag.png"),size=(200,200))
+
+    #+++++++++++++++++++#
+    def pick_french():
+        global chosen_lang
+        global lang_title
+        #
+        chosen_lang = "French"
+        lang_title = chosen_lang
+        #
+        lang_csv_reader.lang_switch_db(chosen_lang)
+    ####
+    french_lang_flag = customtkinter.CTkButton(pick_lang_window,text="", image=french_lang_flag_img, command=pick_french)
     french_lang_flag.place(x=0,y=0)
+
+
 
     ##################END:
     def on_closing():

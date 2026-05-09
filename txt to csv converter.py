@@ -3,9 +3,8 @@ import time
 import pandas
 from gevent.util import print_run_info
 
-
 #========================FETCH TEXT:
-text_data_column = pandas.read_csv("data/Spanish/es_50k.txt")
+text_data_column = pandas.read_csv("data/French/fr_500.csv")
 # print(text_data_frame)
 #########################
 finalized_list = []
