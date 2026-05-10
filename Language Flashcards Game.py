@@ -7,7 +7,6 @@ from PIL import ImageTk, Image
 from customtkinter import CTkImage, CTkLabel
 #
 import lang_csv_reader
-import random
 
 #====================Global Constants:
 BACKGROUND_COLOR = "#B1DDC6"
@@ -56,10 +55,7 @@ widgets_y_place = 20
 buttons_x_displacement = 50
 buttons_y_displacement = 50
 
-
-#====================#====================#====================#==================
-#====================#====================#====================#====================LANGUAGES Globals:
-#====================#====================#====================#==================
+#====================LANGUAGES Globals:
 #LANGAUGES
 FRENCH_LANG = "French"
 # FRENCH_LANG_ICON =
@@ -68,13 +64,54 @@ chosen_lang = "French" #default
 #x+x+x+x+x+x+x+x+x+x+x+x
 lang_title = chosen_lang
 
-# def lang_selected():
-#     global chosen_lang
-#     global lang_title
-#     #
+#______________________________________________________________
+print('''                                                                                                                                                  
+                                                              ...::::.      ...::::::::    :.      .:.   
+  5@@@@@@@@B!    &@@@@@@@&G:        ^G&@@@&P#@@@@B~          J@@@@@@@@@G.   #@@@@@@@@@@   .@@B    7@@?   
+  G@@~::::J@@!   @@#     B@@.      :@@G::~&@@!::Y@@~         J@@~    ^@@B   #@@.           !@@J  .@@B    
+  G@@     .@@Y   @@@    5&@#       ~@@!   B@&   :@@?         J@@:     &@#   #@@BBBBBBB      P@@: #@@.    
+  7BP     .@@J   PBGGGGGB@@B       :BB^   B@&   :@@?         ~GP.     &@#   JGPYYYYYYY       &@# @@!     
+  Y&&^....?@@7   #&P     J@@:  ##  ^&&~   B@&   ^@@?         ?@@7:  :7@@P   Y@& ......       ^@@@@P      
+  P@@@@@@@@&?    &@B     ?@@:  ##  ~@@!   B@&   :@@?         ?@@@@@@@@#J    J&@@@@@@@@?       ?@@B  
 
 
-#++++++++++++++++++++++++++++++++++++++++BUTTON & FUNCTIONS
+                                                             !J!:                                                                
+                                                              ^G@@&P7:                                                           
+                                         .~7YGB#&&&&&&&#BG5?~:  .Y@@@@&G^                                                        
+                                    :?P&@@@@@@@@@@@@@@@@@@@@@@@&G?J@@@@@&                                                        
+                                .!G@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@P   ...                                                 
+                              ~B@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@BG&&@@@@                                              
+                            ?&@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&                                             
+                          7@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&#GYP#&J                                            
+                        .B@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@!                                                
+                       :&@@@@@@@@@@@@@@@@J7@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@P                                               
+                      .@@@@@@@@@@@@@@@@#:  ^&@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@G                                              
+                      #@@@@@@@@@@@@@@&7      P@@@@@@@@@@@@@B&@@@@@@@&@@#&@@@@@@@@@@J                                             
+                     !@@@@@@@@@@@@@&?         ^#@@@@&&@@@@@@#PPGB##? B@5#@#@@@@@@@@@:                                            
+                     B@@@@@@@@@@@G~             ^B@@@&GG#@@@@@@@#~   .&#J@Y&@@@@@@@@G                                            
+                     @@@@@@@@@@~                  .?#@@@&BGPGBBJ      .#5G&J@@@@@@@@@.                                           
+                   .@@@@@@@@@7      !PB##B4^        .^JG#&&P:  ^4B###P4?!~!?@@@@@@@@^                                           
+                   .@@@@@@@@#      !4~.. .~4^                 ~4~....~4^    #@@@@@@@^   .~                                      
+               ~BJ :@@@@@@@@BJYYYYYYJJJJYJJJJJJJ?!.     .!?JYYYJJYYYJJJYYYYY&@@@@@@@P7: .G#?.                                   
+            .?BG^  &@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@?...5@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@?  .Y#5:                                 
+          :5BJ.    @@@@@@@@@&PJJJJJJ????JJJJ5&@@@@@@@@@@@@@@@GYJJ??????JJJJJYB@@@@@@@@@Y     7BB~                               
+        !GG~       .YGG@@@@B        ...       G@@@@@@@@@@@@@:     .::.        !@@@@&GP7        ^G#?                             
+     .JB5:             &@@@Y      4P..P@G.    7@@@@@@@@@@@@&    ^:^B@@@P.      @@@@~             .J#5.                          
+     J@J               &@@@5     G@@4Y&@@&    ?@@@@?::^#@@@&   ~@4^B@@@@#     .@@@@~              ^#&:                          
+      .5#J.            &@@@5     ?@@@@@@@P    7@@@@.   ?@@@&   .@@@@@@@@Y     .@@@@~           .J#P:                            
+        .?#P:          #@@@G      .JGBBY:     5@@@&    ^@@@@.    ?B&&#P^      :@@@@~         ^PBJ.                              
+           ~BB!        7@@@@5.              :P@@@@J     #@@@&!.             .!&@@@&        7BG~                                 
+             :5#J.      ?@@@@@@@@@@@@@@@@@@@@@@@@J      .#@@@@@@&&&&&&&@&&@@@@@@@B.     :5BY.                                   
+               .J#!      .7G&&@@@@@@@@@@@@@@&&G7.         ^5#&@@@@@@@@@@@@@@@&BJ:       7!                                      
+
+
+ ''')
+
+print(f"**** WELCOME to Language Flashcards Game {ver}   -by-    Dr.M-Dev ****")
+#====================#====================#====================#==================
+#====================#====================#====================#==================
+#====================#====================#====================#==================
+#++++++++++++++++++++++++++++++++++++++++BUTTON-FUNCTIONS
 LP_Window_Is_ON = False #Disabled by default! #that way you can "HOVER and ACTIVATE IT"
 #+++++++++++++++++++#
 #______________________SWITCHING FUN\\
@@ -108,14 +145,19 @@ def pick_this_language(language):
 #__________________BUTTONS FUN\\ #French or German or Russian or Spanish or Chinese
 def select_french():
     pick_this_language("French")
+    set_current_lang_flag("French")
 def select_german():
     pick_this_language("German")
+    set_current_lang_flag("German")
 def select_russian():
     pick_this_language("Russian")
+    set_current_lang_flag("Russian")
 def select_spanish():
     pick_this_language("Spanish")
+    set_current_lang_flag("Spanish")
 def select_chinese():
     pick_this_language("Chinese")
+    set_current_lang_flag("Chinese")
 
 #-------------------------------------------------FLAG IMAGE FILES:
 ###################Pick Language Window Options: #French or German or Russian or Spanish or Chinese
@@ -135,8 +177,10 @@ def pick_language():
     global spanish_lang_flag_img
     global chinese_lang_flag_img
     ##################STARTUP
+    global chosen_lang
+    #---
     global LP_Window_Is_ON
-    LP_Window_Is_ON = True #-->#IMPORTANT SWITCH (to disable click-ablity & hover images)\\
+    LP_Window_Is_ON = True #-->#IMPORTANT SWITCH (to disable click-able & hover images)\\
     # {-} #
     print("DEBUG: pick-language window activated")
     print(f"LANG PICK WINDOW STATE->>{LP_Window_Is_ON}")
@@ -159,7 +203,7 @@ def pick_language():
     pick_lang_window.title(f"Select A Language :)")
     # ----
     # #NOW switching this window to TOP LEVEL so it can respond to commands
-    # print(" <!> WINDOW-2 is top level now <!>")
+    # print("<!> WINDOW-2 is top level now <!>")
     # customtkinter.CTkToplevel(master=pick_lang_window)
     # ================
     # ================
@@ -219,6 +263,37 @@ def pick_language():
     chinese_lang_label = customtkinter.CTkLabel(pick_lang_window, text="Chinese", text_color="black",font=language_label_fonts, fg_color="transparent", bg_color="transparent")
     chinese_lang_label.place(x=flags_x_place + 150, y=flags_y_place + flags_displacement * 5 + 8)
 
+#__________________________________________________
+    # Current Lang Indicator:
+    win2_current_language_indicator = customtkinter.CTkLabel(pick_lang_window, text=f"You Selected:",
+                                                             text_color="black",
+                                                             font=("Courier", 25, "bold"),
+                                                             fg_color="transparent", width=50,
+                                                             height=50)
+    win2_current_language_indicator.place(x=flags_x_place, y=flags_y_place + flags_displacement * 5 + 60)
+    #
+    ################## LANGUAGE-INDICATOR:
+    def change_lang_indicator(selected_lang):
+        win2_current_language_indicator.configure(text=f"You Selected: {selected_lang}")
+
+    ################## #----HOVER-Indicator
+    def fr_b_hover_in(event):
+        change_lang_indicator("French-🇫🇷")
+    def de_b_hover_in(event):
+        change_lang_indicator("German-🇩🇪")
+    def ru_b_hover_in(event):
+        change_lang_indicator("Russian-🇷🇺")
+    def es_b_hover_in(event):
+        change_lang_indicator("Spanish-🇪🇸")
+    def zh_ch_b_hover_in(event):
+        change_lang_indicator("Chinese-🇨🇳")
+    # bind events:
+    french_lang_flag_b.bind("<Enter>", fr_b_hover_in)
+    german_lang_flag_b.bind("<Enter>", de_b_hover_in)
+    russian_lang_flag_b.bind("<Enter>", ru_b_hover_in)
+    spanish_lang_flag_b.bind("<Enter>", es_b_hover_in)
+    chinese_lang_flag_b.bind("<Enter>", zh_ch_b_hover_in)
+
 
 #__________________________________________________
     ################## LANGUAGE-WINDOW-OPTIONS END:
@@ -227,7 +302,7 @@ def pick_language():
         global chosen_lang
         #----
         global LP_Window_Is_ON
-        LP_Window_Is_ON = False #-->#IMPORTANT SWITCH (to enable click-ablity & hover images)\\
+        LP_Window_Is_ON = False #-->#IMPORTANT SWITCH (to enable click-able & hover images)\\
         # {-} #
         print("DEBUG: pick-language window IS OFF")
         print(f"LANG PICK WINDOW STATE->>{LP_Window_Is_ON}")
@@ -361,7 +436,7 @@ def picking_word():
     #=================
     switch_card_front()
     # DEBUG:
-    # print(f"THE WORD{the_word}\nANDDDD IT'S MEANING IS {the_meaning}")
+    # print(f"THE WORD{the_word}\nAND IT'S MEANING IS {the_meaning}")
 
 #--------------
 #GET A CARD BUTTON - Terminal / Primordial-Button xD
@@ -591,6 +666,8 @@ def set_current_lang_flag(current_lang):
     global spanish_lang_flag_img
     global chinese_lang_flag_img
     #----
+    global player_SCORE
+    #----
     language = current_lang
     #----
     if language == "French":
@@ -606,6 +683,7 @@ def set_current_lang_flag(current_lang):
     else:
         current_language_indicator.configure(image=french_lang_flag_img)#back to default
     # ----
+    player_SCORE = 0
 
 
 #0000-Switch-Lang Button
