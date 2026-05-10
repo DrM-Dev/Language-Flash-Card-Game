@@ -6,7 +6,10 @@ import customtkinter
 from PIL import ImageTk, Image
 from customtkinter import CTkImage, CTkLabel
 #
+from tkinter import messagebox
+#
 import lang_csv_reader
+
 
 #====================Global Constants:
 BACKGROUND_COLOR = "#B1DDC6"
@@ -143,21 +146,49 @@ def pick_this_language(language):
 #+++++++++++++++++++#
 
 #__________________BUTTONS FUN\\ #French or German or Russian or Spanish or Chinese
+def finalizing_language_selection(selected_lang):
+    global player_SCORE
+    # ----
+    confirm = messagebox.askyesno(title="Language Switch Warning", message=f"Are you sure you want to switch the cards to {selected_lang}?\nyour score will be back to 0!")
+    # ----
+    print(confirm) #DEBUG
+    # ---
+    if confirm:
+        if selected_lang == "French":
+            pick_this_language("French")
+            set_current_lang_flag("French")
+            #
+        elif selected_lang == "German":
+            pick_this_language("German")
+            set_current_lang_flag("German")
+            #
+        elif selected_lang == "Russian":
+            pick_this_language("Russian")
+            set_current_lang_flag("Russian")
+            #
+        elif selected_lang == "Spanish":
+            pick_this_language("Spanish")
+            set_current_lang_flag("Spanish")
+            #
+        elif selected_lang == "Chinese":
+            pick_this_language("Chinese")
+            set_current_lang_flag("Chinese")
+        player_SCORE = 0
+    else:
+        print("no language was chosen")
+
+#-------
 def select_french():
-    pick_this_language("French")
-    set_current_lang_flag("French")
+    finalizing_language_selection("French")
 def select_german():
-    pick_this_language("German")
-    set_current_lang_flag("German")
+    finalizing_language_selection("German")
 def select_russian():
-    pick_this_language("Russian")
-    set_current_lang_flag("Russian")
+    finalizing_language_selection("Russian")
 def select_spanish():
-    pick_this_language("Spanish")
-    set_current_lang_flag("Spanish")
+    finalizing_language_selection("Spanish")
 def select_chinese():
-    pick_this_language("Chinese")
-    set_current_lang_flag("Chinese")
+    finalizing_language_selection("Chinese")
+
 
 #-------------------------------------------------FLAG IMAGE FILES:
 ###################Pick Language Window Options: #French or German or Russian or Spanish or Chinese
@@ -666,8 +697,6 @@ def set_current_lang_flag(current_lang):
     global spanish_lang_flag_img
     global chinese_lang_flag_img
     #----
-    global player_SCORE
-    #----
     language = current_lang
     #----
     if language == "French":
@@ -683,7 +712,7 @@ def set_current_lang_flag(current_lang):
     else:
         current_language_indicator.configure(image=french_lang_flag_img)#back to default
     # ----
-    player_SCORE = 0
+
 
 
 #0000-Switch-Lang Button
